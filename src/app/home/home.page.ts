@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { TvService } from '../provides/tv.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +9,14 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  constructor(private tv: TvService, private router: Router) {}
 
+  public listaShow: Array<object>;
+
+  ionViewDidEnter(){
+    this.tv.getShows()
+    .subscribe((dados: [{}]) =>{
+      this.listaShow = dados;
+    });
+  }
 }
